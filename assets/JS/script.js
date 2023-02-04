@@ -66,7 +66,7 @@ nextQuestion = () => {
                 alert('Correct');
             } else {
                 alert('Incorrect');
-                
+            }
             nextQuestion();
         });
     });
