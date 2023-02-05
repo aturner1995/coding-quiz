@@ -160,7 +160,7 @@ const timer = () => {
 
 const gameover = () => {
     finalScore = score + timeLeft;
-    window.location.assign("/end.html")
+    window.location.assign("/pages/end.html")
     localStorage.setItem("currentScore", finalScore);
 }
 // Event listener for the correct answer. The result is displayed on the page and calls the nextQuestion
