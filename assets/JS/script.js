@@ -105,26 +105,29 @@ var questions = [
         answer: 'inline'
         }
 ];
-
+// Select page elements to dynamically update text.
 const questionEl = document.querySelector('.question');
 const choicesEl = document.querySelectorAll('.choice-text');
 const answerEl = document.querySelector('.answer-correct-incorrect')
 const timerEl = document.querySelector('.timer');
 
+//  Initialize score, and the current question.
 let currentQuestion = {};
 let score = 0;
 let questionCounter = 0;
+// Set the value of points and time penalty for incorrect answers.
 const SCORE_POINTS = 10;
-const SCORE_PENALTY = 5;
-
+const TIME_PENALTY = 5;
+// Start game function to initalize question counter, score & to start the timer + first question.
 const startGame = () => {
     questionCounter = 0;
     score = 0;
     nextQuestion();
-    timeLeft = questions.length * 1;
+    timeLeft = questions.length * 10;
     timer();
 };
-
+// Next question function will end game if all questions are answered & inputs the the question + selections
+// on the page.
 const nextQuestion = () => {
     if (questionCounter === questions.length) {
         gameover();
@@ -138,33 +141,11 @@ const nextQuestion = () => {
         choice.textContent = currentQuestion['choice' + number];
     });
 };
-
-choicesEl.forEach(choice => {
-    choice.addEventListener('click', e => {
-        if (e.target.textContent === currentQuestion.answer) {
-            score += SCORE_POINTS;
-            answerEl.textContent = "Answer Correct"
-            setTimeout(hide,1000);
-            timeLeft = timeLeft + SCORE_PENALTY;
-        } else {
-            answerEl.textContent = "Answer Incorrect"
-            setTimeout(hide,1000);
-            if (timeLeft < SCORE_PENALTY) {
-                gameover();
-            }
-            else {
-                timeLeft = timeLeft - SCORE_PENALTY;
-            }            
-        }
-        questionCounter++;
-        nextQuestion();
-    });
-});
-
+// Hide the answer text content after 1 second when user moves to the next question.
 const hide = () => {
     answerEl.textContent = '';
 }
-
+// Timer for quiz. If timer = 0 the quiz ends.
 const timer = () => {
     let timerInterval = setInterval(() => {
         timeLeft--;
@@ -178,8 +159,31 @@ const timer = () => {
 };
 
 const gameover = () => {
+    finalScore = score + timeLeft;
     window.location.assign("/end.html")
-    localStorage.setItem("currentScore", score);
+    localStorage.setItem("currentScore", finalScore);
 }
+// Event listener for the correct answer. The result is displayed on the page and calls the nextQuestion
+// function. If the time is below the TIME_PENALTY the gameover function is called.
+choicesEl.forEach(choice => {
+    choice.addEventListener('click', e => {
+        if (e.target.textContent === currentQuestion.answer) {
+            score += SCORE_POINTS;
+            answerEl.textContent = "Answer Correct";
+            setTimeout(hide,1000);
+        } else {
+            answerEl.textContent = "Answer Incorrect"
+            setTimeout(hide,1000);
+            if (timeLeft < TIME_PENALTY) {
+                gameover();
+            }
+            else {
+                timeLeft = timeLeft - TIME_PENALTY;
+            }            
+        }
+        questionCounter++;
+        nextQuestion();
+    });
+});
 
 startGame();
