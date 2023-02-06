@@ -129,7 +129,7 @@ let score = 0;
 let questionCounter = 0;
 // Set the value of points and time penalty for incorrect answers.
 const SCORE_POINTS = 10;
-const TIME_PENALTY = 5;
+const TIME_PENALTY = 10;
 // Start game function to initalize question counter, score & to start the timer + first question.
 const startGame = () => {
     questionCounter = 0;
@@ -137,7 +137,7 @@ const startGame = () => {
     introEl.style.display = "none";
     quizEl.style.display = "flex";
     nextQuestion();
-    timeLeft = questions.length * 1;
+    timeLeft = questions.length * 10;
     timer();
 };
 // Next question function will end game if all questions are answered & inputs the the question + selections
@@ -192,7 +192,7 @@ const saveHighScore = () => {
     localStorage.setItem('highScoreList', JSON.stringify(storedHighScore)); 
     displayScores();
 }
-
+// Function to retrive the high score data and display it on the high score page
 const displayScores = () => {
     let highScores = JSON.parse(localStorage.getItem('highScoreList')) || [];
     listEl.textContent = '';
@@ -203,8 +203,16 @@ const displayScores = () => {
         listEl.appendChild(itemEl);
     });
 }
+// function to retrive the high scores and display the scores when the page opens
+const init = () => {
+    displayScores();
+}
 
-// Event listener for the correct answer. The result is displayed on the page and calls the nextQuestion
+init();
+
+// Event listeners 
+
+// Click listener for correct answer. The result is displayed on the page and calls the nextQuestion
 // function. If the time is below the TIME_PENALTY the gameover function is called.
 choicesEl.forEach(choice => {
     choice.addEventListener('click', e => {
@@ -229,14 +237,14 @@ choicesEl.forEach(choice => {
         }         
     });
 });
-
+// When user selects play or play again the quiz starts
 playButtonEl.forEach(i => {
     i.addEventListener('click', e => {
         location.reload;
         startGame();
     })
 })
-
+// When the save score button is clicked the default behaviour is stopped and the savehHighScore function is called
 saveScoreButtonEl.addEventListener('click', e => {
    if (userName.value === '') {
         e.preventDefault();
@@ -250,7 +258,7 @@ saveScoreButtonEl.addEventListener('click', e => {
         introEl.style.display = 'none';
     }  
 })
-
+// Directs to the high score list
 highScoreButtonEl.forEach(i => {
     i.addEventListener('click', e => {
         introEl.style.display = 'none';
@@ -258,12 +266,12 @@ highScoreButtonEl.forEach(i => {
         highScoreEl.style.display = 'flex';
     })
 })
-
+// Clear scores from local storage and reload page
 clearEl.addEventListener('click', e => {
     localStorage.removeItem('highScoreList');
     location.reload();
   })
-
+// Main menu button
 introButtonEl.addEventListener('click', e => {
     introEl.style.display = 'flex'
     highScoreEl.style.display = 'none';
