@@ -174,9 +174,10 @@ const gameover = () => {
     endEl.style.display = 'flex';
     finalScore.textContent = "Final Score: " + score;
 }
-// 
+// Function to save the current score to the local storage and sort the high score list
 const saveHighScore = () => {
     let storedHighScore = JSON.parse(localStorage.getItem("highScoreList")) || [];
+    console.log(storedHighScore);
 
     let currentScore = {
         score: score,
@@ -194,6 +195,7 @@ const saveHighScore = () => {
 
 const displayScores = () => {
     let highScores = JSON.parse(localStorage.getItem('highScoreList')) || [];
+    listEl.textContent = '';
 
     highScores.forEach(score => {
         const itemEl = document.createElement('li');
@@ -201,13 +203,6 @@ const displayScores = () => {
         listEl.appendChild(itemEl);
     });
 }
-
-// When quiz loads the highscore list is retrieved from local stoarge and displayed on high score list
-const init = () => {
-    displayScores();
-}
-
-init();
 
 // Event listener for the correct answer. The result is displayed on the page and calls the nextQuestion
 // function. If the time is below the TIME_PENALTY the gameover function is called.
@@ -240,6 +235,7 @@ choicesEl.forEach(choice => {
 
 playButtonEl.forEach(i => {
     i.addEventListener('click', e => {
+        location.reload;
         startGame();
     })
 })
@@ -271,5 +267,6 @@ clearEl.addEventListener('click', e => {
   })
 
 introButtonEl.addEventListener('click', e => {
-    location.reload();
+    introEl.style.display = 'flex'
+    highScoreEl.style.display = 'none';
 })
