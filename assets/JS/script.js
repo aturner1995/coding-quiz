@@ -123,7 +123,7 @@ const startGame = () => {
     questionCounter = 0;
     score = 0;
     nextQuestion();
-    timeLeft = questions.length * 10;
+    timeLeft = questions.length * 1;
     timer();
 };
 // Next question function will end game if all questions are answered & inputs the the question + selections
@@ -174,6 +174,7 @@ choicesEl.forEach(choice => {
             answerEl.textContent = "Answer Incorrect"
             setTimeout(hide,1000);
             if (timeLeft < TIME_PENALTY) {
+                timeLeft = 0;
                 gameover();
             }
             else {
