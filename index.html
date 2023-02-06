@@ -9,19 +9,65 @@
     <meta name="description" content="Coding quiz with javascript">
     <meta name="author" content="Aaron Turner">
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./assets/CSS/style.css">
 </head>
 
 <body>
-    <div class="container">
+    <div class="container container1">
         <div id="home" class="flex-column">
             <h1>Coding Quiz Challenge</h1>
             <p>Try to answer the following code releated questions within the time limit. Keep in mind that incorrect answers will penalize your score time by ten seconds</p>
-            <a href="quiz.html" class="btn">Start Quiz</a>
-            <a href="highscores.html" class="btn">High Scores</a>
+            <button class="btn play-btn">Start Quiz</button>
+            <button class="btn score-btn">High Scores</button>
         </div>
-    </div>  
+    </div>
+    
+    <div class="container container2">
+        <div id="quiz" class="flex-column hidden">
+            <h1>Coding Quiz Challenge</h1>
+            <div class="timer"></div>
+            <div class="question"></div>
+            <div class="choice-container">
+                <p class="choice-text" data-question="1"></p>
+            </div>
+            <div class="choice-container">
+                <p class="choice-text" data-question="2"></p>
+            </div>
+            <div class="choice-container">
+                <p class="choice-text" data-question="3"></p>
+            </div>
+            <div class="choice-container">
+                <p class="choice-text" data-question="4"></p>
+            </div>
+            <div class="answer-correct-incorrect"></div>
 
+        </div>
+    </div>
+
+    <div class="container container3">
+        <div id="end" class="flex-column">
+            <h1 class="final-score-text">Final Score: </h1>
+            <form class="end-form-container">
+                <h2>Enter your name below to save your score</h2>
+                <input type="text" name="name" id="username">
+                <button class="btn" id="save-score-btn">Save Score</button>
+            </form>
+            <button class="btn play-btn">Play Again</button>
+            <button class="btn score-btn">Highscores</button>
+        </div>
+    </div>
+
+    <div class="container container4">
+        <div class="highscore flex-column">
+            <h1>Highscores</h1>
+            <ol class="highscore-list"></ol>
+            <button class="btn intro-btn">Main Menu</button>
+            <button class="btn play-btn">Play Again</button>
+            <button class="btn" id="clear">Clear Scores</button>
+        </div>
+    </div>
+
+    <script src="./assets/JS/script.js"></script>
 </body>
 
 </html>
