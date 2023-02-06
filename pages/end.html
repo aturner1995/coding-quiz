@@ -2,11 +2,28 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <title>Coding Quiz</title>
+    <meta name="description" content="Coding quiz with javascript">
+    <meta name="author" content="Aaron Turner">
+
+    <link rel="stylesheet" href="/assets/CSS/style.css">
 </head>
 <body>
-    <h1>Congrats!</h1>
+    <div class="container">
+        <div id="end" class="flex-column">
+            <h1 class="final-score-text">Final Score: </h1>
+            <form class="end-form-container">
+                <h2>Enter your name below to save your score</h2>
+                <input type="text" name="name" id="username">
+                <a href="/pages/highscores.html" class="btn" id="save-btn">Save Score</a>
+            </form>
+            <a href="/pages/quiz.html" class="btn">Play Again</a>
+            <a href="/pages/highscores.html" class="btn">Highscores</a>
+        </div>
+    </div>
+
+    <script src="/assets/JS/end.js"></script>
 </body>
 </html>

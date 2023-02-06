@@ -46,3 +46,8 @@ p {
     transform: scale(1.01);
     background-color: rgb(29, 29, 211);
 }
+
+.end-form-container{
+    display: flex;
+    flex-direction: column;
+}

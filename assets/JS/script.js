@@ -132,7 +132,6 @@ const nextQuestion = () => {
     if (questionCounter === questions.length) {
         gameover();
     }    
-    
     currentQuestion = questions[questionCounter];
     questionEl.textContent = currentQuestion.question;
 
@@ -157,11 +156,11 @@ const timer = () => {
         }
     }, 1000)
 };
-
+// When time is zero or the user completes all questions the function saves the score and goes to the end game page
 const gameover = () => {
-    finalScore = score + timeLeft;
+    score += timeLeft
     window.location.assign("/pages/end.html")
-    localStorage.setItem("currentScore", finalScore);
+    localStorage.setItem("currentScore", score);
 }
 // Event listener for the correct answer. The result is displayed on the page and calls the nextQuestion
 // function. If the time is below the TIME_PENALTY the gameover function is called.
