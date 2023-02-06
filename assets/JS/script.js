@@ -115,7 +115,7 @@ const quizEl = document.querySelector('.container2');
 const endEl = document.querySelector('.container3');
 const highScoreEl = document.querySelector('.container4');
 const playButtonEl = document.querySelectorAll('.play-btn');
-const scoreButtonEl = document.querySelectorAll('.score-btn');
+const highScoreButtonEl = document.querySelectorAll('.score-btn');
 const saveScoreButtonEl = document.querySelector('#save-score-btn');
 const userName = document.querySelector('#username');
 const finalScore = document.querySelector('.final-score-text');
@@ -137,7 +137,7 @@ const startGame = () => {
     introEl.style.display = "none";
     quizEl.style.display = "flex";
     nextQuestion();
-    timeLeft = questions.length * 7;
+    timeLeft = questions.length * 1;
     timer();
 };
 // Next question function will end game if all questions are answered & inputs the the question + selections
@@ -161,7 +161,7 @@ const timer = () => {
         timeLeft--;
         timerEl.textContent = 'Time Left: '+ timeLeft;
 
-        if (timeLeft === 0) {
+        if (timeLeft === 0 || questionCounter === questions.length) {
             clearInterval(timerInterval);
             gameover();           
         }
@@ -169,7 +169,7 @@ const timer = () => {
 };
 // When time is zero or the user completes all questions the function saves the score and goes to the end game page
 const gameover = () => {
-    score += timeLeft
+    score += timeLeft;
     quizEl.style.display = 'none';
     endEl.style.display = 'flex';
     finalScore.textContent = "Final Score: " + score;
@@ -215,7 +215,7 @@ choicesEl.forEach(choice => {
         } else {
             answerEl.textContent = "Answer Incorrect"
             setTimeout(hide,1000);
-            if (timeLeft < TIME_PENALTY) {
+            if (timeLeft <= TIME_PENALTY) {
                 timeLeft = 0;
                 gameover();
             }
@@ -224,12 +224,9 @@ choicesEl.forEach(choice => {
             }            
         }
         questionCounter++;
-        if (questionCounter === questions.length) {
-            gameover();
-        } 
-        else {
+        if (questionCounter < questions.length) {
             nextQuestion();
-        }        
+        }         
     });
 });
 
@@ -254,9 +251,10 @@ saveScoreButtonEl.addEventListener('click', e => {
     }  
 })
 
-scoreButtonEl.forEach(i => {
+highScoreButtonEl.forEach(i => {
     i.addEventListener('click', e => {
         introEl.style.display = 'none';
+        endEl.style.display = 'none';
         highScoreEl.style.display = 'flex';
     })
 })
