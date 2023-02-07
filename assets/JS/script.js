@@ -48,7 +48,7 @@ const nextQuestion = () => {
 const hide = () => {
     answerEl.textContent = '';
 }
-// Timer for quiz. If timer = 0 the quiz ends.
+// Timer for quiz. If timer = 0 or the questions are finished the quiz ends and the clock stops.
 const timer = () => {
     let timerInterval = setInterval(() => {
         timeLeft--;
